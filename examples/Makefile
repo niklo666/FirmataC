@@ -1,8 +1,7 @@
 
 all:
-	gcc  -L.. -I../includes ledBlink.c -lfirmatac -o ledBlink.ex		
-	gcc  -L.. -I../includes servoTest.c -lfirmatac -o servotest.ex		
- 
+	gcc  -L.. -I../includes ledBlink.c -lfirmatac -o ledblink
+	gcc  -L.. -I../includes servoTest.c -lfirmatac -o servotest
 
 clean:
 	rm *.ex
