@@ -15,6 +15,7 @@
 #define LOW		0
 #define HIGH		1
 
+// todo: change to incrementing order and sync with arduino lib...
 #define FIRMATA_START_SYSEX		0xF0 // start a MIDI Sysex message
 #define FIRMATA_END_SYSEX		0xF7 // end a MIDI Sysex message
 #define FIRMATA_PIN_MODE_QUERY		0x72 // ask for current and supported pin modes
