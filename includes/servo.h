@@ -6,11 +6,11 @@
 
 typedef struct	s_servo
 {
-  t_firmata	*firmata;
+  firmata_t	*firmata;
   int		pin;
-}		t_servo;
+}		servo_t;
 
-t_servo		*servo_attach(t_firmata *firmata, int pin);
-int		servo_write(t_servo *servo, int value);
+servo_t		*servo_attach(firmata_t *firmata, int pin);
+int		servo_write(servo_t *servo, int value);
 
 #endif

@@ -4,16 +4,16 @@
 #include	<stdlib.h>
 #include	<stdio.h>
 
-t_servo		*servo_attach(t_firmata *firmata, int pin)
+servo_t		*servo_attach(firmata_t *firmata, int pin)
 {
-  t_servo	*res;
+  servo_t	*res;
 
   if (!firmata || !firmata->isReady)
     {
       perror("servo_new::Firmata is not ready");
       return (NULL);
     }
-  res = malloc(sizeof(t_servo));
+  res = malloc(sizeof(servo_t));
   if (!res)
     {
       perror("servo_new::malloc failed");
@@ -25,7 +25,7 @@ t_servo		*servo_attach(t_firmata *firmata, int pin)
   return (res);
 }
 
-int		servo_write(t_servo *servo, int value)
+int		servo_write(servo_t *servo, int value)
 {
   return (firmata_analogWrite(servo->firmata, servo->pin, value));
 }

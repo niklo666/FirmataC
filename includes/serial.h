@@ -18,16 +18,16 @@ typedef struct		s_serial
   struct termios	settings;
   int			tx;
   int			rx;
-}			t_serial;
+}			serial_t;
 
-t_serial *serial_new();
-int serial_open(t_serial *serial, char *name);
-int	serial_setBaud(t_serial *serial, int baud);
-int	serial_read(t_serial *serial, void *ptr, int count);
-int	serial_write(t_serial *serial, void *ptr, int len);
-int	serial_waitInput(t_serial *serial, int msec);
-void serial_discardInput(t_serial *serial);
-void serial_flushOutput(t_serial *serial);
-int serial_setControl(t_serial *serial, int dtr, int rts);
+serial_t *serial_new();
+int serial_open(serial_t *serial, char *name);
+int	serial_setBaud(serial_t *serial, int baud);
+int	serial_read(serial_t *serial, void *ptr, int count);
+int	serial_write(serial_t *serial, void *ptr, int len);
+int	serial_waitInput(serial_t *serial, int msec);
+void serial_discardInput(serial_t *serial);
+void serial_flushOutput(serial_t *serial);
+int serial_setControl(serial_t *serial, int dtr, int rts);
 
 #endif

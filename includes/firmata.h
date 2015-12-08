@@ -60,7 +60,7 @@ typedef struct		s_pin
 
 typedef struct s_firmata
 {
-  t_serial  *serial;
+  serial_t  *serial;
   pin_t     pins[128];  // todo: use const/define...
   int			  parse_command_len;
   int			  parse_count;

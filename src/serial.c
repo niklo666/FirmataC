@@ -54,11 +54,11 @@ struct serial_struct
 #include <linux/serial.h>
 #endif // __linux
 
-t_serial	*serial_new()
+serial_t	*serial_new()
 {
-  t_serial	*res = NULL;
+  serial_t	*res = NULL;
 
-  res = malloc(sizeof(t_serial));
+  res = malloc(sizeof(serial_t));
   if (!res)
   {
     return (NULL);
@@ -72,7 +72,7 @@ t_serial	*serial_new()
   return (res);
 }
 
-int		serial_open(t_serial *serial, char *name)
+int		serial_open(serial_t *serial, char *name)
 {
   struct serial_struct	kernel_serial_settings;
   int			bits;
@@ -144,7 +144,7 @@ int		serial_open(t_serial *serial, char *name)
   return 0;
 }
 
-int serial_setBaud(t_serial *serial, int baud)
+int serial_setBaud(serial_t *serial, int baud)
 {
   speed_t spd;
   switch (baud)
@@ -228,7 +228,7 @@ int serial_setBaud(t_serial *serial, int baud)
   return (0);
 }
 
-int		serial_read(t_serial *serial, void *ptr, int count)
+int		serial_read(serial_t *serial, void *ptr, int count)
 {
   int		n, bits;
 
@@ -250,7 +250,7 @@ int		serial_read(t_serial *serial, void *ptr, int count)
   return (n);
 }
 
-int		serial_write(t_serial *serial, void *ptr, int len)
+int		serial_write(serial_t *serial, void *ptr, int len)
 {
   //printf("Write %d\n", len);
   if (!serial->port_is_open) return -1;
@@ -284,7 +284,7 @@ int		serial_write(t_serial *serial, void *ptr, int len)
   return (written);
 }
 
-int		serial_waitInput(t_serial *serial, int msec)
+int		serial_waitInput(serial_t *serial, int msec)
 {
   if (!serial->port_is_open) return -1;
 
@@ -298,7 +298,7 @@ int		serial_waitInput(t_serial *serial, int msec)
   return (select(serial->port_fd+1, &rfds, NULL, NULL, &tv));
 }
 
-void		serial_discardInput(t_serial *serial)
+void		serial_discardInput(serial_t *serial)
 {
   if (!serial->port_is_open) return;
 
@@ -306,14 +306,14 @@ void		serial_discardInput(t_serial *serial)
   tcflush(serial->port_fd, TCIFLUSH);
 }
 
-void		serial_flushOutput(t_serial *serial)
+void		serial_flushOutput(serial_t *serial)
 {
   if (!serial->port_is_open) return;
 
   tcdrain(serial->port_fd);
 }
 
-int		serial_setControl(t_serial *serial, int dtr, int rts)
+int		serial_setControl(serial_t *serial, int dtr, int rts)
 {
   if (!serial->port_is_open) return -1;
 
