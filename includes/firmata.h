@@ -56,27 +56,27 @@ typedef struct		s_pin
   uint8_t		analog_channel;
   uint64_t		supported_modes;
   uint32_t		value;
-}			t_pin;
+}pin_t;
 
-typedef struct		s_firmata
+typedef struct s_firmata
 {
-  t_serial		*serial;
-  t_pin			pins[128];  // todo: use const/define...
-  int			parse_command_len;
-  int			parse_count;
-  uint8_t		parse_buff[FIRMATA_MSG_LEN];
-  int			isReady;
-  char			firmware[140]; // todo: use const/define...
-}			t_firmata;
+  t_serial  *serial;
+  pin_t     pins[128];  // todo: use const/define...
+  int			  parse_command_len;
+  int			  parse_count;
+  uint8_t	  parse_buff[FIRMATA_MSG_LEN];
+  int			  isReady;
+  char      firmware[140]; // todo: use const/define...
+}firmata_t;
 
-t_firmata	*firmata_new(char *name);
-void firmata_initPins(t_firmata *firmata);
-int firmata_askFirmware(t_firmata *firmata);
-int firmata_pinMode(t_firmata *firmata, int pin, int mode);
-int	firmata_digitalWrite(t_firmata *firmata, int pin, int value);
-int	firmata_analogWrite(t_firmata *firmata, int pin, int value);
-int	firmata_pull(t_firmata *firmata);
-void firmata_parse(t_firmata *firmata, const uint8_t *buf, int len);
-void firmata_endParse(t_firmata *firmata);
+firmata_t	*firmata_new(char *name);
+void firmata_initPins(firmata_t *firmata);
+int firmata_askFirmware(firmata_t *firmata);
+int firmata_pinMode(firmata_t *firmata, int pin, int mode);
+int	firmata_digitalWrite(firmata_t *firmata, int pin, int value);
+int	firmata_analogWrite(firmata_t *firmata, int pin, int value);
+int	firmata_pull(firmata_t *firmata);
+void firmata_parse(firmata_t *firmata, const uint8_t *buf, int len);
+void firmata_endParse(firmata_t *firmata);
 
 #endif

@@ -6,12 +6,12 @@
 #include	<stdlib.h>
 #include	<stdio.h>
 
-t_firmata	*firmata_new(char *name)
+firmata_t	*firmata_new(char *name)
 {
-  t_firmata	*res;
+  firmata_t	*res;
 
   printf("Opening device at: %s\n", name);
-  res = malloc(sizeof(t_firmata));
+  res = malloc(sizeof(firmata_t));
   if (!res)
   {
     perror("firmata_new::Failed malloc");
@@ -34,7 +34,7 @@ t_firmata	*firmata_new(char *name)
   return (res);
 }
 
-int	firmata_pull(t_firmata *firmata)
+int	firmata_pull(firmata_t *firmata)
 {
   uint8_t	buff[FIRMATA_MSG_LEN];
   int		r;
@@ -60,7 +60,7 @@ int	firmata_pull(t_firmata *firmata)
   }
 }
 
-void firmata_parse(t_firmata *firmata, const uint8_t *buf, int len)
+void firmata_parse(firmata_t *firmata, const uint8_t *buf, int len)
 {
   const uint8_t	*p;
   const uint8_t	*end;
@@ -110,7 +110,7 @@ void firmata_parse(t_firmata *firmata, const uint8_t *buf, int len)
   }
 }
 
-void firmata_endParse(t_firmata *firmata)
+void firmata_endParse(firmata_t *firmata)
 {
   uint8_t	cmd = (firmata->parse_buff[0] & 0xF0);
   int		pin;
@@ -258,7 +258,7 @@ void firmata_endParse(t_firmata *firmata)
   }
 }
 
-void firmata_initPins(t_firmata *firmata)
+void firmata_initPins(firmata_t *firmata)
 {
   int		i;
 
@@ -275,7 +275,7 @@ void firmata_initPins(t_firmata *firmata)
   }
 }
 
-int	firmata_askFirmware(t_firmata *firmata)
+int	firmata_askFirmware(firmata_t *firmata)
 {
   uint8_t	buf[3];
   int		res;
@@ -287,7 +287,7 @@ int	firmata_askFirmware(t_firmata *firmata)
   return (res);
 }
 
-int	firmata_pinMode(t_firmata *firmata, int pin, int mode)
+int	firmata_pinMode(firmata_t *firmata, int pin, int mode)
 {
   int		res;
   uint8_t	buff[4];
@@ -301,7 +301,7 @@ int	firmata_pinMode(t_firmata *firmata, int pin, int mode)
   return (res);
 }
 
-int	firmata_analogWrite(t_firmata *firmata, int pin, int value)
+int	firmata_analogWrite(firmata_t *firmata, int pin, int value)
 {
   int		res;
 
@@ -314,7 +314,7 @@ int	firmata_analogWrite(t_firmata *firmata, int pin, int value)
   return (res);
 }
 
-int	firmata_digitalWrite(t_firmata *firmata, int pin, int value)
+int	firmata_digitalWrite(firmata_t *firmata, int pin, int value)
 {
   int		i;
   int		res;
