@@ -26,7 +26,7 @@ int		serial_setBaud(t_serial *serial, int baud);
 int		serial_read(t_serial *serial, void *ptr, int count);
 int		serial_write(t_serial *serial, void *ptr, int len);
 int		serial_waitInput(t_serial *serial, int msec);
-int		serial_discardInput(t_serial *serial);
+void		serial_discardInput(t_serial *serial);
 void		serial_flushOutput(t_serial *serial);
 int		serial_setControl(t_serial *serial, int dtr, int rts);
 
