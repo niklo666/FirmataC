@@ -15,10 +15,10 @@
 #define LOW		0
 #define HIGH		1
 
-#define FIRMATA_START_SYSEX		0xF0 // start a MIDI Sysex message                                                   
-#define FIRMATA_END_SYSEX		0xF7 // end a MIDI Sysex message                                                     
-#define FIRMATA_PIN_MODE_QUERY		0x72 // ask for current and supported pin modes                                      
-#define FIRMATA_PIN_MODE_RESPONSE	0x73 // reply with current and supported pin modes                                   
+#define FIRMATA_START_SYSEX		0xF0 // start a MIDI Sysex message
+#define FIRMATA_END_SYSEX		0xF7 // end a MIDI Sysex message
+#define FIRMATA_PIN_MODE_QUERY		0x72 // ask for current and supported pin modes
+#define FIRMATA_PIN_MODE_RESPONSE	0x73 // reply with current and supported pin modes
 #define FIRMATA_PIN_STATE_QUERY		0x6D
 #define FIRMATA_PIN_STATE_RESPONSE	0x6E
 #define FIRMATA_CAPABILITY_QUERY	0x6B
@@ -39,7 +39,7 @@
 
 #define FIRMATA_START_SYSEX             0xF0 // start a MIDI Sysex message
 #define FIRMATA_END_SYSEX               0xF7 // end a MIDI Sysex message
- 
+
 // extended command set using sysex (0-127/0x00-0x7F)
 /* 0x00-0x0F reserved for custom commands */
 #define FIRMATA_SERVO_CONFIG            0x70 // set max angle, minPulse, maxPulse, freq
@@ -61,22 +61,22 @@ typedef struct		s_pin
 typedef struct		s_firmata
 {
   t_serial		*serial;
-  t_pin			pins[128];
+  t_pin			pins[128];  // todo: use const/define...
   int			parse_command_len;
   int			parse_count;
   uint8_t		parse_buff[FIRMATA_MSG_LEN];
   int			isReady;
-  char			firmware[140];
+  char			firmware[140]; // todo: use const/define...
 }			t_firmata;
 
-t_firmata		*firmata_new(char *name);
-void			firmata_initPins(t_firmata *firmata);
-int			firmata_askFirmware(t_firmata *firmata);
-int			firmata_pinMode(t_firmata *firmata, int pin, int mode);
-int			firmata_digitalWrite(t_firmata *firmata, int pin, int value);
-int			firmata_analogWrite(t_firmata *firmata, int pin, int value);
-int			firmata_pull(t_firmata *firmata);
-void			firmata_parse(t_firmata *firmata, const uint8_t *buf, int len);
-void			firmata_endParse(t_firmata *firmata);
+t_firmata	*firmata_new(char *name);
+void firmata_initPins(t_firmata *firmata);
+int firmata_askFirmware(t_firmata *firmata);
+int firmata_pinMode(t_firmata *firmata, int pin, int mode);
+int	firmata_digitalWrite(t_firmata *firmata, int pin, int value);
+int	firmata_analogWrite(t_firmata *firmata, int pin, int value);
+int	firmata_pull(t_firmata *firmata);
+void firmata_parse(t_firmata *firmata, const uint8_t *buf, int len);
+void firmata_endParse(t_firmata *firmata);
 
 #endif
