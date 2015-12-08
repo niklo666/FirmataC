@@ -2,8 +2,8 @@
 
 int		main()
 {
-  t_firmata	*firmata;
-  t_servo	*servo;
+  firmata_t	*firmata;
+  servo_t	*servo;
 
   firmata = firmata_new("/dev/ttyACM0");
   while(!firmata->isReady)
@@ -19,4 +19,3 @@ int		main()
       servo_write(servo, val);
     }
 }
-

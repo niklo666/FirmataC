@@ -3,7 +3,7 @@
 
 int             main()
 {
-  t_firmata     *firmata;
+  firmata_t     *firmata;
   int           i = 0;
 
   firmata = firmata_new("/dev/ttyACM0"); //init Firmata
@@ -19,4 +19,3 @@ int             main()
         firmata_digitalWrite(firmata, 13, LOW); //unlight led
     }
 }
-

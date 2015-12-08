@@ -11,11 +11,11 @@ CPPFLAGS += $(foreach includedir,$(program_INCLUDE_DIRS),-I$(includedir))
 LDFLAGS += $(foreach librarydir,$(program_LIBRARY_DIRS),-L$(librarydir))
 LDFLAGS += $(foreach library,$(program_LIBRARIES),-l$(library))
 
-.PHONY: all clean distclean
+.PHONY: all clean distclean examples
 
 all: $(program_NAME)
 	ar rc libfirmatac.a $(program_OBJS)
- 
+
 $(program_NAME): $(program_OBJS)
 #	$(CC) $(program_OBJS) -o $(program_NAME)
 
@@ -27,3 +27,6 @@ clean:
 re: clean all
 
 distclean: clean
+
+examples:
+	$(MAKE) -C examples
